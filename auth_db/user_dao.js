@@ -8,7 +8,6 @@ var UserDAO = function(){
     this.insert = function(values, callback){
         let stmt = db.prepare("INSERT INTO user VALUES(?,?,?,?)");
         stmt.run([values[0], values[1], values[2], values[3]], callback);
-
         callback.insertId;
     };
 
