@@ -32,7 +32,7 @@ var BattleDao = function(){
      * callback : Message d'erreur
      */
      this.findAll = function(callback){
-        db.all("SELECT * FROM battle",callback);
+        db.getAll("SELECT * FROM battle",callback);
     };
 
     /**
@@ -54,7 +54,7 @@ var BattleDao = function(){
      * callback : Message d'erreur
      */
     this.findByPlayerOneForeignKey = function(key, callback){
-        db.all("SELECT * FROM battle WHERE joueur1 =?",key, callback);
+        db.getAll("SELECT * FROM battle WHERE joueur1 =?",key, callback);
     };
 
     /**
@@ -62,7 +62,7 @@ var BattleDao = function(){
      * callback : Message d'erreur
      */
      this.findByPlayerTwoForeignKey = function(key, callback){
-        db.all("SELECT * FROM battle WHERE joueur2 =?",key, callback);
+        db.getAll("SELECT * FROM battle WHERE joueur2 =?",key, callback);
     };
 };
 

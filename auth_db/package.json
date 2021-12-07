@@ -1,0 +1,13 @@
+{
+    "name": "auth-db",
+    "version": "0.1.0",
+    "description": "database for auth API",
+    "main": "auth-db.js",
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.17.1",
+        "mysql": "^2.18.1",
+        "sqlite3": "^4.1.0"
+    }
+}
