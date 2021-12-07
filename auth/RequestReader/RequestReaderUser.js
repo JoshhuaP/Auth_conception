@@ -1,6 +1,11 @@
+const controleurUser  = require('../controler/ControleurUser');
 
 module.exports = class RequestReaderUser {
 
+    /**
+     * 
+     * @param { la requette post } request 
+     */
     readData(request){
         let body = request.body;
         let mail = body.mail;
@@ -12,9 +17,11 @@ module.exports = class RequestReaderUser {
             info.body = {message: 'accept : mail=test@test.fr&pseudo=test&pwd=testmdp'};
             return info;
         }
-        /*
+        
         //request the controleur
-        result = addUserToBD(mail, pseudo, password);
+        let controleurUser = new ControleurUser();
+        result = controleurUser.addUserToBD(mail, pseudo, password);
+        
         // 201 -> created return id
         if(result.statusRequest == 201){
             info.status = 201;
@@ -28,7 +35,7 @@ module.exports = class RequestReaderUser {
             info.status = 500;
             info.body = {message: 'restart after'};
         }  
-        */
+        
         info.status = 201;
         info.body = {id: "idtest"};
 
