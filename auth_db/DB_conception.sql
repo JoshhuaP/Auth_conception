@@ -42,8 +42,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `id_user` smallint(6) NOT NULL AUTO_INCREMENT,
   `pseudo` varchar(50) UNIQUE NOT NULL,
   `email` varchar(100) UNIQUE NOT NULL,
-  `password` varchar(50) NOT NULL,
-  PRIMARY KEY (`id_user`)
+  `password` varchar(250) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- Listage des données de la table database_conception.user : ~0 rows (environ)

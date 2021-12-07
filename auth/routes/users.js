@@ -5,7 +5,9 @@ const RequestReaderUser  = require('../RequestReader/RequestReaderUser');
 /* POST registri for add user. */
 router.post('/',(request,res) => {
     let requestReaderUser = new RequestReaderUser();
-    info = requestReaderUser.readData(request);
-    res.status(info.status).json(info.body).send();
+    requestReaderUser.readData(request, function (info){
+        res.status(info.statusRequest).json(info.body);
     });
+    
+});
 module.exports = router;
