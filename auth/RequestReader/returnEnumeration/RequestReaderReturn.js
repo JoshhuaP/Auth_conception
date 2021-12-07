@@ -1,4 +1,4 @@
-module.exports = class RequestReaderLoginReturn{
+module.exports = class RequestReaderReturn{
     static AuthentificationValid = "AuthentificationValid";
     static GenerationTokenFailed = "GenerationTokenFailed";
     static AuthentificationFailed ="AuthentificationFailed";

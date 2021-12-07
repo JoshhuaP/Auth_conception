@@ -7,6 +7,8 @@ const RequestReaderLogin  = require('../RequestReader/RequestReaderLogin');
 router.post('/', function(request, res, next) { 
   let requestReaderLogin = new RequestReaderLogin();
   requestReaderLogin.ReadRequest(request, res, next);
+  res.status(requestReaderLogin.info.status)
+  res.send(requestReaderLogin.info.body);
 });
 
 module.exports = router;

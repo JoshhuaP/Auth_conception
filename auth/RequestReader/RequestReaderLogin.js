@@ -1,16 +1,17 @@
-const RequestReaderLoginReturn  = require('./returnEnumeration/RequestReaderLoginReturn.js');
+const RequestReaderReturn  = require('./returnEnumeration/RequestReaderReturn.js');
 
 module.exports = class RequestReaderLogin{
   /**Username read in the request */
     username = null;
     /**Password read in the request */
     password = null;
-
+    info = {};
     /**Read the request and define username and password
      * @return false if the request hasn't the right data, otherwise return true
      */
     ReadData(request){
         let data = request.body;
+        console.log(data)
         if("user" in data)
         {
           this.username = data.user;
@@ -18,18 +19,21 @@ module.exports = class RequestReaderLogin{
         else
         {
           console.log("Undefined username")
-
+          this.info.status = 400;
+          this.info.body = {"message" : RequestReaderReturn.DataRequestInvalid.toString()};
           return false;
         }
+
         if("pwd" in data)
         {
           this.password = data.pwd;      
         }
         else
         {
+          
+          this.info.status = 400;
           console.log("Undefined password")
-          res.statusCode = 400;
-          res.send("badRequest");
+          this.info.body = {"message" : RequestReaderReturn.DataRequestInvalid.toString()};
           return false;
         }
         return true;
@@ -38,37 +42,17 @@ module.exports = class RequestReaderLogin{
     /** Receives the request and answer it 
      * @return 0 if 
      */
-    ReadRequest(request, res, next){
+    ReadRequest(request){
         if(!this.ReadData(request))
         {
-            res.statusCode = 400;
-            res.send(RequestReaderLoginReturn.DataRequestInvalid.toString());
-            return RequestReaderLoginReturn.DataRequestInvalid;
+            return RequestReaderReturn.DataRequestInvalid;
         }
-        
-        let Authentification = true; // Authentification
-        if(Authentification)
-        {
-          let token = ""// generation of token
-          if(token == "")
-          {
-            res.status(500)
-            res.send(RequestReaderLoginReturn.GenerationTokenFailed.toString());
-            return RequestReaderLoginReturn.GenerationTokenFailed;
-          }
-          else
-          {
-            res.status(200)
-            res.send(token);   
-            return RequestReaderLoginReturn.AuthentificationValid;         
-          }
-        }
-        else
-        {
-          res.status(403)
-          res.send(RequestReaderLoginReturn.AuthentificationFailed.toString());
-          return RequestReaderLoginReturn.AuthentificationFailed;
-        }
-        
+        let authentification = {} // get the token
+        authentification.status = 200
+        authentification.body = {"token": "digjdojgiodfjgodjgoidjgodj554gdg"}
+
+        this.info.status =  authentification.status // Authentication
+        this.info.body = authentification.body
+        return RequestReaderReturn.AuthentificationValid
     }
 }
