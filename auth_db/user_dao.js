@@ -8,6 +8,7 @@ var UserDAO = function(){
     this.insert = function(values, callback){
         let stmt = db.prepare("INSERT INTO user VALUES(?,?,?,?)");
         stmt.run([values[0], values[1], values[2], values[3]], callback);
+        callback.insertId;
     };
 
     /**
@@ -16,7 +17,7 @@ var UserDAO = function(){
      * callback : Message d'erreur
      */
     this.update = function(key, values, callback){
-        let stmt = db.prepare("UPDATE user SET pseudo = ?, email = ?, password = ? WHERE id=?");
+        let stmt = db.prepare("UPDATE user SET pseudo = ?, email = ?, password = ? WHERE id_user=?");
         stmt.run([values[1], values[2], values[3], values[4],key],callback);
     };
 
@@ -25,7 +26,7 @@ var UserDAO = function(){
      * callback : Message d'erreur
      */
      this.delete = function(key, callback){
-        db.run("DELETE FROM user WHERE id=?",key,callback);
+        db.run("DELETE FROM user WHERE id_user=?",key,callback);
     };
 
     /**
@@ -40,7 +41,7 @@ var UserDAO = function(){
      * callback : Message d'erreur
      */
 	this.findByKey = function(key, callback){
-        db.all("SELECT * FROM user WHERE id =?",key, function(err,rows){
+        db.all("SELECT * FROM user WHERE id_user =?",key, function(err,rows){
             if(err){
                 console.log(err.message);
             }else{
@@ -55,6 +56,14 @@ var UserDAO = function(){
      */
     this.findByMail = function(key, callback){
         db.all("SELECT * FROM user WHERE email =?",key, callback);
+    };
+
+    /**
+     * key : Cle d'identification
+     * callback : Message d'erreur
+     */
+    this.findByPseudo = function(key, callback){
+        db.all("SELECT password FROM user WHERE pseudo =?",key, callback);
     };
 };
 
