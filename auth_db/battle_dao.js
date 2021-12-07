@@ -6,8 +6,8 @@ var BattleDao = function(){
      * callback : Message d'erreur
      */
     this.insert = function(values, callback){
-        let stmt = db.prepare("INSERT INTO battle VALUES(?,?,?)");
-        stmt.run([values[0], values[1], values[2]], callback);
+        let stmt = db.prepare("INSERT INTO battle VALUES(?,?,?,?,?,?,?)");
+        stmt.run([values[0], values[1], values[2], values[3], values[4], values[5], values[6]], callback);
     }; 
 
     /**
@@ -16,8 +16,8 @@ var BattleDao = function(){
      * callback : Message d'erreur
      */
     this.update = function(key, values, callback){
-        let stmt = db.prepare("UPDATE battle SET joueur1 = ?, joueur2 = ? WHERE id=?");
-        stmt.run([values[1], values[2], values[3],key],callback);
+        let stmt = db.prepare("UPDATE battle SET id_joueur1 = ?, id_joueur2 = ?, score1 = ?, score2 = ?, date = ?, duree = ? WHERE id_battle=?");
+        stmt.run([values[1], values[2], values[3], values[4], values[5], values[6], values[47,key],callback);
     };
 
     /**
@@ -25,7 +25,7 @@ var BattleDao = function(){
      * callback : Message d'erreur
      */
      this.delete = function(key, callback){
-        db.run("DELETE FROM battle WHERE id=?",key,callback);
+        db.run("DELETE FROM battle WHERE id_battle=?",key,callback);
     };
 
     /**
@@ -40,7 +40,7 @@ var BattleDao = function(){
      * callback : Message d'erreur
      */
 	this.findByKey = function(key, callback){
-        db.all("SELECT * FROM battle WHERE id =?",key, function(err,rows){
+        db.all("SELECT * FROM battle WHERE id_battle =?",key, function(err,rows){
             if(err){
                 console.log(err.message);
             }else{
