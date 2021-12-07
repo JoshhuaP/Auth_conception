@@ -8,8 +8,6 @@ var UserDAO = function(){
     this.insert = function(values, callback){
         let stmt = db.prepare("INSERT INTO user VALUES(?,?,?,?)");
         stmt.run([values[0], values[1], values[2], values[3]], callback);
-
-        callback.insertId;
     };
 
     /**
@@ -19,7 +17,7 @@ var UserDAO = function(){
      */
     this.update = function(key, values, callback){
         let stmt = db.prepare("UPDATE user SET pseudo = ?, email = ?, password = ? WHERE id=?");
-        stmt.run([values[1], values[2], values[3],key],callback);
+        stmt.run([values[1], values[2], values[3], values[4],key],callback);
     };
 
     /**
