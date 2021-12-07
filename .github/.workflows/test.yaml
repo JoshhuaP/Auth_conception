@@ -1,0 +1,6 @@
+test:
+    stage: check
+    image: weboaks/node-karma-protractor-chrome
+    script:
+        - npm install --silent
+        - npm run test
