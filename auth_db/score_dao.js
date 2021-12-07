@@ -18,6 +18,7 @@ var ScoreDAO = function(){
     this.update = function(key, values, callback){
         let stmt = db.prepare("UPDATE score SET id_battle = ?, score1 = ?, score2 = ? WHERE id=?");
         stmt.run([values[1], values[2], values[3],key],callback);
+
     };
 
     /**
