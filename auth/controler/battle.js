@@ -17,7 +17,7 @@ module.exports = class ControleurBattle {
 
         battle_dao.insert([player1, player2, score1, score2, date, time], (err, battle)=>{
             if(err == null){
-                callback( {statusRequest:201, id : battle.insertId});
+                callback( {statusRequest:201, id : battle});
             }else{
                 callback( {statusRequest:500 ,"erreur" : "bdd"});
             }
