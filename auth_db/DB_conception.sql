@@ -20,22 +20,16 @@ USE `database_conception`;
 -- Listage de la structure de la table database_conception. battle
 CREATE TABLE IF NOT EXISTS `battle` (
   `id_battle` smallint(6) NOT NULL AUTO_INCREMENT,
-  `id_joueur1` smallint(6) NOT NULL DEFAULT,
-  `id_joueur2` smallint(6) NOT NULL DEFAULT,
-  `score1` smallint(6) NOT NULL DEFAULT,
-  `score2` smallint(6) NOT NULL DEFAULT,
+  `id_joueur1` smallint(6) NOT NULL,
+  `id_joueur2` smallint(6) NOT NULL,
+  `score1` smallint(6) NOT NULL,
+  `score2` smallint(6) NOT NULL,
   `date` datetime NOT NULL,
   `duree` time NOT NULL,
-  PRIMARY KEY (`id_battle`) USING BTREE,
-  KEY `FK1_battle_user` (`id_joueur1`),
-  CONSTRAINT `FK1_battle_score` FOREIGN KEY (`id_joueur1`) REFERENCES `user` (`id_user`)
-  KEY `FK1_battle_user` (`id_joueur2`),
-  CONSTRAINT `FK1_battle_score` FOREIGN KEY (`id_joueur2`) REFERENCES `user` (`id_user`)
+  PRIMARY KEY (`id_battle`),
+  CONSTRAINT `FK1_battle_score` FOREIGN KEY (`id_joueur1`) REFERENCES `user` (`id_user`),
+  CONSTRAINT `FK2_battle_score` FOREIGN KEY (`id_joueur2`) REFERENCES `user` (`id_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
--- Listage des données de la table database_conception.score : ~0 rows (environ)
-/*!40000 ALTER TABLE `score` DISABLE KEYS */;
-/*!40000 ALTER TABLE `score` ENABLE KEYS */;
 
 -- Listage de la structure de la table database_conception. user
 CREATE TABLE IF NOT EXISTS `user` (
@@ -43,12 +37,9 @@ CREATE TABLE IF NOT EXISTS `user` (
   `pseudo` varchar(50) UNIQUE NOT NULL,
   `email` varchar(100) UNIQUE NOT NULL,
   `password` varchar(250) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
--- Listage des données de la table database_conception.user : ~0 rows (environ)
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
