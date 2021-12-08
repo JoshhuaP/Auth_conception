@@ -1,4 +1,9 @@
+name: test
+
+on: push
+
 test:
+
     stage: check
     image: weboaks/node-karma-protractor-chrome
     script:
