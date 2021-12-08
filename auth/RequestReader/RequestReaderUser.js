@@ -13,7 +13,7 @@ module.exports = class RequestReaderUser {
         let password = body.pwd;
         if(mail == null || pseudo == null || password == null){
             let info = {}
-            info.status = 400;
+            info.statusRequest = 400;
             info.body = {message: 'accept : mail=test@test.fr&pseudo=test&pwd=testmdp'};
             callback( info );
             return;
