@@ -71,6 +71,22 @@ var UserDAO = function(){
     };
 
     /**
+     * key1 : Cle d'identification utilisateur 1
+     * key2 : Cle d'identification utilisateur 2
+     * callback : Message d'erreur
+     */
+	this.findBy2Key = function(key1, key2, callback){
+        db.all("SELECT * FROM user WHERE id_user = ? OR id_user = ? ",[key1, key2], function (err, rows) {
+            if(err){
+                callback(err, null);
+            }else{
+                callback(null, rows);
+            }
+        });
+    };
+
+
+    /**
      * key : Cle d'identification
      * callback : Message d'erreur
      */

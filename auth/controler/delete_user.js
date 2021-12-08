@@ -11,14 +11,12 @@ module.exports = class ControleurUser {
           if(rows.toString()==""){
               user_dao.delete(key, (err, user)=>{
                   if(err == null){
-                      console.log(user)
                       return {status:201, id : user.id}
                   }else{
                       return {"erreur" : "bdd"}
                   }
               });
           }else{
-              console.log(rows)
               return {status:403, id : "delete"}
           }
       });

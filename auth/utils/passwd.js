@@ -17,7 +17,6 @@ const loginCheck = passport => {
             data = {}
             data.status = 403
             data.body = {"message" : RequestReaderReturn.AuthentificationFailed}
-            console.log("wrong pseudo");
             return data;
           }
 
@@ -33,7 +32,6 @@ const loginCheck = passport => {
               data = {}
               data.status = 403
               data.body = {"message" : RequestReaderReturn.AuthentificationFailed}
-              console.log("Wrong password");
               return data;
             }
           });

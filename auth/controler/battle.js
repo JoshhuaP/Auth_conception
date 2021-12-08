@@ -1,4 +1,5 @@
 var battle_dao = require('auth_db').battle_dao;
+var user_dao = require('auth_db').user_dao;
 const bcrypt = require('bcrypt');
 
 module.exports = class ControleurBattle {
@@ -7,7 +8,6 @@ module.exports = class ControleurBattle {
             if(err == null){
                 callback( {statusRequest:200, battles: battles});
             }else{
-                console.error(err);
                 callback( {statusRequest:500 ,"erreur" : "bdd"});
             }
         });
@@ -24,13 +24,24 @@ module.exports = class ControleurBattle {
      */
     addBattleToDB(player1, player2, score1, score2, date, time, callback)
     {
-
-        battle_dao.insert([player1, player2, score1, score2, date, time], (err, battle)=>{
-            if(err == null){
-                callback( {statusRequest:201, id : battle});
-            }else{
-                callback( {statusRequest:500 ,"erreur" : "bdd"});
-            }
-        });
+        if(player1 !== player2){
+            user_dao.findBy2Key(player1, player2,  (err, users)=>{
+                if (users.length == 2){
+                    battle_dao.insert([player1, player2, score1, score2, date, time], (err, battle)=>{
+                        if(err == null){
+                            callback( {statusRequest:201, id : battle});
+                        }else{
+                            callback( {statusRequest:500 ,erreur : "bdd"});
+                        }
+                    });
+                }else{
+                    callback( {statusRequest:403 ,erreur : "au moins un des players n'existe pas"});
+                }
+                
+            });    
+        }else{
+            callback( {statusRequest:403 ,erreur : "player identique"}); 
+        }
+        
     }
 }
