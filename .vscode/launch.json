@@ -7,6 +7,10 @@
         {
             "name": "Start via NPM",
             "request": "launch",
+            "cwd": "${workspaceFolder}/auth",
+            "env": {
+                "DEBUG": "auth:*"
+            },
             "runtimeArgs": [
                 "run-script",
                 "start"
@@ -16,9 +20,6 @@
                 "<node_internals>/**"
             ],
             "type": "pwa-node",
-            "env": {
-                "DEBUG": "auth:*"
-            },
             "outputCapture": "std"
         }
     ]
