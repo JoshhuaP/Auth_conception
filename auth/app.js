@@ -6,7 +6,7 @@ var jest = require('jest')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var logginRouter = require('./routes/login');
-var deleteRouter = require('./routes/delete');
+var deleteRouter = require('./routes/delete_user');
 
 var app = express();
 
