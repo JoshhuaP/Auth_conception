@@ -1,20 +1,30 @@
 const bcrypt = require("bcryptjs");
 LocalStrategy = require("passport-local").Strategy;
-
+//si l'authentification réussit 
+return generationToken();
+generationToken =>{
+data = {}
+data.status = 201
+data.body = {token : ""}
+}
 //Load model
 
-const User = require("../models/User");
+const User = require('auth_db').user_dao;
 
 const loginCheck = passport => {
   passport.use(
     new LocalStrategy({ usernameField: "pseudo" }, (pseudo, password, done) => {
       //Check customer
 
-      User.findOne({ email: email })
+      User.findOne({ pseudo: pseudo })
         .then((user) => {
           if (!user) {
+            //si le nom d'utilisateur n'existe pas
+            data = {}
+            data.status = 403
+            data.body = {"message" : RequestReaderReturn.AuthentificationFailed}
             console.log("wrong pseudo");
-            return done();
+            return data;
           }
 
           //Match Password
@@ -24,8 +34,12 @@ const loginCheck = passport => {
             if (isMatch) {
               return done(null, user);
             } else {
+              // si le mot de passe est mauvais
+              data = {}
+              data.status = 403
+              data.body = {"message" : RequestReaderReturn.AuthentificationFailed}
               console.log("Wrong password");
-              return done();
+              return data;
             }
           });
         })
@@ -47,23 +61,3 @@ const loginCheck = passport => {
 module.exports = {
   loginCheck,
 };
-/*
-const loginUser = (req, res) => {
-  const { pseudo, password } = req.body;
-
-  //Required
-  if (!pseudo || !password) {
-    console.log("Please fill in all the fields");
-    res.render("login", {
-      pseudo,
-      password,
-    });
-  } else {
-    passport.authenticate("local", {
-      successRedirect: "/dashboard",
-      failureRedirect: "/login",
-      failureFlash: true,
-    })(req, res);
-  }
-};
-    */
