@@ -1,4 +1,4 @@
-const ControleurUser  = require('../controler/user');
+const ControleurUser  = require('../controler/add_user');
 
 module.exports = class RequestReaderUser {
 
