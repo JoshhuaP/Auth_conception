@@ -34,6 +34,15 @@ module.exports = class RequestReaderLogin{
         return true;
     }
 
+    /**
+     * Ask at the controler to check the authentication and get the token or an error message
+     */
+    askAuthentification(){
+        let authentification = {} // get the token
+        authentification.status = 200
+        authentification.body = {"token": "digjdojgiodfjgodjgoidjgodj554gdg"}
+    }
+
     /** Receives the request and answer it 
      * @return 0 if 
      */
@@ -42,12 +51,9 @@ module.exports = class RequestReaderLogin{
         {
             return RequestReaderReturn.DataRequestInvalid;
         }
-        let authentification = {} // get the token
-        authentification.status = 200
-        authentification.body = {"token": "digjdojgiodfjgodjgoidjgodj554gdg"}
-
+        let authentification = this.askAuthentification();
         this.info.status =  authentification.status // Authentication
         this.info.body = authentification.body
-        return RequestReaderReturn.AuthentificationValid
+        return RequestReaderReturn.RequestValid
     }
 }
