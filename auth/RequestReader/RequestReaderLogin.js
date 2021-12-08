@@ -11,14 +11,10 @@ module.exports = class RequestReaderLogin{
      */
     ReadData(request){
         let data = request.body;
-        console.log(data)
-        if("user" in data)
-        {
+        if("user" in data){
           this.username = data.user;
         }
-        else
-        {
-          console.log("Undefined username")
+        else{
           this.info.status = 400;
           this.info.body = {"message" : RequestReaderReturn.DataRequestInvalid.toString()};
           return false;
@@ -32,7 +28,6 @@ module.exports = class RequestReaderLogin{
         {
           
           this.info.status = 400;
-          console.log("Undefined password")
           this.info.body = {"message" : RequestReaderReturn.DataRequestInvalid.toString()};
           return false;
         }

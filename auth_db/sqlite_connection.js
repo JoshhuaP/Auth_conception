@@ -1,7 +1,20 @@
-var sqlite3 = require ("sqlite3");
-var dao = new sqlite3.Database(__dirname+"/DB_conception.sql", sqlite3.OPEN_READWRITE, function(err){
-	if(err){
-		console.log(err.message);
-    }
+
+const mysql = require("mysql");
+const dbConfig = require("../config/db.config.js");
+
+// Create a connection to the database
+const dao = mysql.createConnection({
+  host: dbConfig.HOST,
+  user: dbConfig.USER,
+  password: dbConfig.PASSWORD,
+  database: dbConfig.DB
 });
+
+// open the MySQL connection
+dao.connect(error => {
+  if (error) throw error;
+  console.log("Successfully connected to the database.");
+});
+
 module.exports = dao;
+
