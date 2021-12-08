@@ -40,7 +40,13 @@ var BattleDao = function(){
      * callback : Message d'erreur
      */
      this.findAll = function(callback){
-        db.query("SELECT * FROM battle",callback);
+        db.all("SELECT * FROM battle", function (err, rows) {
+            if (err) {
+                callback(err, null);
+            } else {
+                callback(null, rows);
+            }
+        });
     };
 
     /**

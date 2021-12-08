@@ -2,6 +2,17 @@ var battle_dao = require('auth_db').battle_dao;
 const bcrypt = require('bcrypt');
 
 module.exports = class ControleurBattle {
+    listBattles(callback) {
+        battle_dao.findAll((err, battles) => {
+            if(err == null){
+                callback( {statusRequest:200, battles: battles});
+            }else{
+                console.error(err);
+                callback( {statusRequest:500 ,"erreur" : "bdd"});
+            }
+        });
+    }
+
     /**
      * 
      * @param { id de l'utilisateur 1} player1 
