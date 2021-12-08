@@ -13,7 +13,6 @@ module.exports = class ControleurBattle {
      */
     addBattleToDB(player1, player2, score1, score2, date, time, callback)
     {
-        // TODO mettre au bon format date et time 
 
         battle_dao.insert([player1, player2, score1, score2, date, time], (err, battle)=>{
             if(err == null){
