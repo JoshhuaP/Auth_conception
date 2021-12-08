@@ -30,46 +30,45 @@ var BattleDao = function() {
      * key : Cle d'identification
      * callback : Message d'erreur
      */
-    this.delete = function (key, callback) {
-        db.query(
-            "DELETE FROM battle WHERE id_battle = ?",
-            [ key ],
-            callback
-        );
+     this.delete = function(key, callback){
+        db.query("DELETE FROM battle WHERE id_battle=?",key,callback);
     };
 
     /**
      * callback : Message d'erreur
      */
-    this.findAll = function (callback) {
-        db.query(
-            "SELECT * FROM battle",
-            callback
-        );
+     this.findAll = function(callback){
+        db.query("SELECT * FROM battle",callback);
     };
 
     /**
      * key : Cle d'identification
      * callback : Message d'erreur
      */
-	this.findByKey = function (key, callback) {
-        db.query(
-            "SELECT * FROM battle WHERE id_battle = ?",
-            [ key ],
-            callback
-        );
+	this.findByKey = function(key, callback){
+        db.query("SELECT * FROM battle WHERE id_battle =?",key, function(err,rows){
+            if(err){
+                console.log(err.message);
+            }else{
+                callback(rows);
+            }
+        });
     };
 
     /**
-     * key : Cle d'identification
+     * key : Cle d'identification du joueur 1
      * callback : Message d'erreur
      */
-    this.findByPlayer = function(key, callback) {
-        db.query(
-            "SELECT * FROM battle WHERE joueur1 = ? OR joueur2 = ?",
-            [ key, key ],
-            callback
-        );
+    this.findByPlayerOneForeignKey = function(key, callback){
+        db.query("SELECT * FROM battle WHERE joueur1 =?",key, callback);
+    };
+
+    /**
+     * key : Cle d'identification du joueur 1
+     * callback : Message d'erreur
+     */
+     this.findByPlayerTwoForeignKey = function(key, callback){
+        db.query("SELECT * FROM battle WHERE joueur2 =?",key, callback);
     };
 };
 
