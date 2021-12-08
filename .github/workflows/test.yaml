@@ -2,11 +2,21 @@ name: test
 
 on: push
 
-test:
+jobs:
+  build:
+  name: test
+    runs-on: ubuntu-latest
 
-    stage: check
-    image: weboaks/node-karma-protractor-chrome
-    script:
-        - npm install
-        - npm run test
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+
+      - name: npm install, and test
+        run: |
+          npm install
+          npm run test
         working-directory: auth
