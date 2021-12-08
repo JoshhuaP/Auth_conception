@@ -19,13 +19,13 @@ module.exports = class ControleurUser {
                             if(rows.length < 1 ){
                                 user_dao.insert([mail, pseudo, hashPasswd], (err, user)=>{
                                     if(err == null){
-                                        callback( {statusRequest:201, id : user.insertId});
+                                        callback( {statusRequest:201, id : user});
                                     }else{
                                         callback( {statusRequest:500 ,"erreur" : "bdd"});
                                     }
                                 });
                             }else{
-                                callback({statusRequest:403, id : rows[0].id});
+                                callback({statusRequest:403, id : rows[0].id_user});
                             }
                         });
                     }else{

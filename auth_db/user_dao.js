@@ -6,12 +6,14 @@ var UserDAO = function(){
      * callback : Message d'erreur
      */
     this.insert = function(values, callback){
-        db.query("INSERT INTO user (pseudo, email, password) VALUES (\"" + values[1] + "\", \"" + values[0] + "\", \"" + values[2] +"\")",function(err,rows){
+
+        let stmt = db.prepare("INSERT INTO user (email, pseudo, password) VALUES(?,?,?)");
+        stmt.run([values[0] ,values[1] ,values[2]] , function(err){
             if(err){
                 callback(err, null);
             }else{
-                callback(null, rows);
-            }
+                callback(null,this.lastID);
+            } 
         });
     };
 
@@ -43,7 +45,7 @@ var UserDAO = function(){
      * callback : Message d'erreur
      */
      this.findAll = function(callback){
-        db.query("SELECT * FROM user", callback)
+        db.all("SELECT * FROM user", callback)
     };
 
     /**
@@ -51,7 +53,7 @@ var UserDAO = function(){
      * callback : Message d'erreur
      */
 	this.findByKey = function(key, callback){
-        db.query("SELECT * FROM user WHERE id =?",key, callback)
+        db.all("SELECT * FROM user WHERE id =?",key, callback)
     };
 
     /**
@@ -59,7 +61,15 @@ var UserDAO = function(){
      * callback : Message d'erreur
      */
     this.findByMail = function(key, callback){
-        db.query("SELECT * FROM user WHERE email =?", key, callback)
+        console.log(key);
+        db.all("SELECT * FROM user WHERE email = ?",key, function (err, rows) {
+            if(err){
+                callback(err, null);
+            }else{
+                console.log("find mail :", rows)
+                callback(null, rows);
+            }
+        });
     };
 
     /**
