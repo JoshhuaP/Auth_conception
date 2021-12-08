@@ -41,7 +41,8 @@ module.exports = class RequestReaderLogin{
         let authentification = {} // get the token
         authentification.status = 200
         authentification.body = {"token": "digjdojgiodfjgodjgoidjgodj554gdg"}
-    }
+        return authentification;
+      }
 
     /** Receives the request and answer it 
      * @return 0 if 
