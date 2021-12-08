@@ -17,7 +17,7 @@ var BattleDao = function(){
      */
     this.update = function(key, values, callback){
         let stmt = db.prepare("UPDATE battle SET id_joueur1 = ?, id_joueur2 = ?, score1 = ?, score2 = ?, date = ?, duree = ? WHERE id_battle=?");
-        stmt.run([values[1], values[2], values[3], values[4], values[5], values[6], values[47,key],callback);
+        stmt.run([values[1], values[2], values[3], values[4], values[5], values[6], values[7],key],callback);
     };
 
     /**

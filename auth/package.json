@@ -10,12 +10,12 @@
     "test": "jest --collect-coverage"
   },
   "dependencies": {
-    "jest" : "~27.2",
     "auth_db": "file:../auth_db",
     "bcrypt": "^5.0.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
+    "jest": "~27.2",
     "jsonwebtoken": "^8.5.1",
     "morgan": "~1.9.1",
     "mysql": "^2.18.1"
