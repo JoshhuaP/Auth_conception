@@ -1,6 +1,6 @@
-const ControleurUser  = require('../controler/add_user');
+const ControleurUser  = require('../controler/delete_user');
 
-module.exports = class RequestReaderUser {
+module.exports = class RequestReaderDeleteUser{
 
     /**
      * 
@@ -21,17 +21,13 @@ module.exports = class RequestReaderUser {
         
         //request the controleur
         let controleurUser = new ControleurUser();
-        controleurUser.addUserToDB(mail, pseudo, password , function (result) {
+        controleurUser.deleteUserToDB( mail , function (result) {
             let info = {};
             // 201 -> created return id
             if(result.statusRequest == 201){
                 info.statusRequest = 201;
                 info.body = {id: result.id};
             // 403 -> already exist return id
-            }else if(result.statusRequest == 403){
-                info.statusRequest = 403;
-                info.body = {id: result.id};
-            // 500 -> other probleme
             }else{
                 info.statusRequest = 500;
                 info.body = {message: 'restart after'};
