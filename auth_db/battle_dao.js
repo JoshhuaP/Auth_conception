@@ -1,6 +1,5 @@
 var db = require('./sqlite_connection');
-
-var BattleDao = function() {
+var BattleDao = function(){
     /**
      * values : Tableau de valeur a inserer
      * callback : Message d'erreur
@@ -64,10 +63,11 @@ var BattleDao = function() {
      */
     this.findByPlayerOneForeignKey = function(key, callback){
         db.query("SELECT * FROM battle WHERE joueur1 =?",key, callback);
+
     };
 
     /**
-     * key : Cle d'identification du joueur 1
+     * key : Cle d'identification du joueur 2
      * callback : Message d'erreur
      */
      this.findByPlayerTwoForeignKey = function(key, callback){
