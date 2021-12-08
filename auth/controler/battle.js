@@ -8,13 +8,13 @@ module.exports = class ControleurBattle {
      * @param { id de l'utilisateur 2 } player2 
      * @param { score de l'utilisateur 1 } score1 
      * @param { score de l'utilisateur 2 } score1 
-     * @param { date en string au format dd/mm/YYYY } date 
-     * @param { tems en ms } time 
+     * @param { date en string au format YYYY-mm-dd } date 
+     * @param { time en string au format hh:ii:ss } time 
      */
     addBattleToDB(player1, player2, score1, score2, date, time, callback)
     {
         // TODO mettre au bon format date et time 
-        
+
         battle_dao.insert([player1, player2, score1, score2, date, time], (err, battle)=>{
             if(err == null){
                 callback( {statusRequest:201, id : battle.insertId});

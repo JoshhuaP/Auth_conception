@@ -8,12 +8,12 @@ module.exports = class RequestReaderBattle {
      */
     readData(request, callback){
         let body = request.body;
-        let player1 = body.mail;
-        let player2 = body.pseudo;
-        let score1 = body.mail;
-        let score2 = body.pseudo;
-        let date = body.mail;
-        let time = body.pseudo;
+        let player1 = body.idP1;
+        let player2 = body.idP2;
+        let score1 = body.score1;
+        let score2 = body.score2;
+        let date = body.date;
+        let time = body.time;
         if(player1 == null || player2 == null || score1 == null || score2 == null || date == null || time == null){
             let info = {}
             info.status = 400;

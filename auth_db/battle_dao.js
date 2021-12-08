@@ -6,7 +6,7 @@ var BattleDao = function(){
      * callback : Message d'erreur
      */
      this.insert = function(values, callback){
-        db.query("INSERT INTO battle (id_joueur1, id_joueur2, score1, score2, date, duree) VALUES (\"" + values[0] + "\", \"" + values[1] + "\", \"" + values[2] +"\", \"" + values[3]+"\", \"" + values[4]+"\", \"" + values[5] +"\")",function(err,rows){
+        db.query("INSERT INTO battle (id_joueur1, id_joueur2, score1, score2, date, duree) VALUES (\"" + values[0] + "\", \"" + values[1] + "\", \"" + values[2] +"\", \"" + values[3]+"\", '" + values[4]+"', '" + values[5] +"')",function(err,rows){
             if(err){
                 callback(err, null);
             }else{
