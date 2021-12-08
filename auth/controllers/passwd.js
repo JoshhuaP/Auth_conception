@@ -7,19 +7,19 @@ const User = require("../models/User");
 
 const loginCheck = passport => {
   passport.use(
-    new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
+    new LocalStrategy({ usernameField: "pseudo" }, (pseudo, password, done) => {
       //Check customer
 
       User.findOne({ email: email })
         .then((user) => {
           if (!user) {
-            console.log("wrong email");
+            console.log("wrong pseudo");
             return done();
           }
 
           //Match Password
 
-          bcrypt.compare(password, user.password, (error, isMatch) => {
+          bcrypt.compare(password, "user.password to change", (error, isMatch) => {
             if (error) throw error;
             if (isMatch) {
               return done(null, user);
@@ -34,12 +34,12 @@ const loginCheck = passport => {
   );
 
   passport.serializeUser((user, done) => {
-    done(null, user.id);
+    done(null, "user.id to change");
   });
 
   passport.deserializeUser((id, done) => {
-    User.findById(id, (error, user) => {
-      done(error, user);
+    User.findById(id, (error, user) => {//selon l'object User de la bdd
+      done(error, "user");
     });
   });
 };
