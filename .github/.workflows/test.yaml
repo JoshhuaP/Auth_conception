@@ -2,5 +2,6 @@ test:
     stage: check
     image: weboaks/node-karma-protractor-chrome
     script:
-        - npm install --silent
+        - npm install
         - npm run test
+        working-directory: auth
