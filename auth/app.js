@@ -6,6 +6,7 @@ var jest = require('jest')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var logginRouter = require('./routes/login');
+var battleRouter = require('./routes/battle');
 
 var app = express();
 
@@ -17,6 +18,7 @@ app.use(cookieParser());
 app.use('/', indexRouter);
 app.use('/login', logginRouter)
 app.use('/user', usersRouter);
+app.use('/battle', battleRouter);
 
 
 // catch 404 and forward to error handler
