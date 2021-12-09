@@ -15,7 +15,6 @@ module.exports = class RequestReaderBattle {
         let date = body.date;
         let time = body.time;
         if(player1 == null || player2 == null || score1 == null || score2 == null || date == null || time == null){
-            console.log("rentre")
             let info = {}
             info.statusRequest = 400;
             info.body = {message: 'accept : idP1=idUser1&idP2=idUser2&score1=1&score2=2&date="yyyy-mm-dd"&time="hh:mm:ss"'};
@@ -31,10 +30,10 @@ module.exports = class RequestReaderBattle {
             if(result.statusRequest == 201){
                 info.statusRequest = 201;
                 info.body = {id: result.id};
-            // 403 -> already exist return id
+            // 403 -> erreur dans la base
             }else if(result.statusRequest == 403){
                 info.statusRequest = 403;
-                info.body = {id: result.id};
+                info.body = {message: result.erreur};
             // 500 -> other probleme
             }else{
                 info.statusRequest = 500;

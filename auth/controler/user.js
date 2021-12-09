@@ -17,11 +17,17 @@ module.exports = class ControleurUser {
                     if (!err){
                         user_dao.findByMail(mail,function(err,rows){
                             if(rows.length < 1 ){
-                                user_dao.insert([mail, pseudo, hashPasswd], (err, user)=>{
-                                    if(err == null){
-                                        callback( {statusRequest:201, id : user});
+                                user_dao.findByPseudo(pseudo, function(err,rows){
+                                    if(rows.length < 1 ){
+                                        user_dao.insert([mail, pseudo, hashPasswd], (err, user)=>{
+                                            if(err == null){
+                                                callback( {statusRequest:201, id : user});
+                                            }else{
+                                                callback( {statusRequest:500 ,"erreur" : "bdd"});
+                                            }
+                                        });
                                     }else{
-                                        callback( {statusRequest:500 ,"erreur" : "bdd"});
+                                        callback({statusRequest:403, id : rows[0].id_user});
                                     }
                                 });
                             }else{

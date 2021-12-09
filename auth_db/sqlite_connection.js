@@ -1,28 +1,6 @@
 const sqlite3 = require('sqlite3')
-/*class AppDAO {
-  constructor() {
-    let db = new sqlite3.Database(__dirname +"/db_conception.db", sqlite3.OPEN_READWRITE, (err) => {
-      if (err) {
-        console.log("erreur")
-        return console.error(err.message);
-      }
-      console.log('Connected to the in-memory SQlite database.');
-    });
-  }
-
-  close(){
-    db.close((err) => {
-      if (err) {
-        return console.error(err.message);
-      }
-      console.log('Close the database connection.');
-    });
-  }
-}
-var test = new AppDAO()*/
 let db = new sqlite3.Database(__dirname +"/db_conception.db", sqlite3.OPEN_READWRITE, (err) => {
     if (err) {
-      console.log("erreur")
       return console.error(err.message);
     }
 

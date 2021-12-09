@@ -21,6 +21,7 @@ var UserDAO = function(){
      * key : Cle d'identification
      * values : Tableau de valeur a modifier
      * callback : Message d'erreur
+     * TODO
      */
     this.update = function(key, values, callback){
         let stmt = db.query("UPDATE user SET pseudo = ?, email = ?, password = ? WHERE id=?", function(err,rows){
@@ -36,6 +37,7 @@ var UserDAO = function(){
     /**
      * key : Cle d'identification
      * callback : Message d'erreur
+     * TODO
      */
      this.delete = function(key, callback){
         db.query("DELETE FROM user WHERE id=?", key, callback)
@@ -45,28 +47,10 @@ var UserDAO = function(){
      * callback : Message d'erreur
      */
      this.findAll = function(callback){
-        db.all("SELECT * FROM user", callback)
-    };
-
-    /**
-     * key : Cle d'identification
-     * callback : Message d'erreur
-     */
-	this.findByKey = function(key, callback){
-        db.all("SELECT * FROM user WHERE id =?",key, callback)
-    };
-
-    /**
-     * key : Cle d'identification
-     * callback : Message d'erreur
-     */
-    this.findByMail = function(key, callback){
-        console.log(key);
-        db.all("SELECT * FROM user WHERE email = ?",key, function (err, rows) {
+        db.all("SELECT * FROM user", function (err, rows) {
             if(err){
                 callback(err, null);
             }else{
-                console.log("find mail :", rows)
                 callback(null, rows);
             }
         });
@@ -76,8 +60,59 @@ var UserDAO = function(){
      * key : Cle d'identification
      * callback : Message d'erreur
      */
-    this.findByPseudo = function(key, callback){
-        db.all("SELECT password, id_user FROM user WHERE pseudo =?", key, callback)
+	this.findByKey = function(key, callback){
+        db.all("SELECT * FROM user WHERE id_user = ?",key, function (err, rows) {
+            if(err){
+                callback(err, null);
+            }else{
+                callback(null, rows);
+            }
+        });
+    };
+
+    /**
+     * key1 : Cle d'identification utilisateur 1
+     * key2 : Cle d'identification utilisateur 2
+     * callback : Message d'erreur
+     */
+	this.findBy2Key = function(key1, key2, callback){
+        db.all("SELECT * FROM user WHERE id_user = ? OR id_user = ? ",[key1, key2], function (err, rows) {
+            if(err){
+                callback(err, null);
+            }else{
+                callback(null, rows);
+            }
+        });
+    };
+
+
+    /**
+     * key : Cle d'identification
+     * callback : Message d'erreur
+     */
+    this.findByMail = function(key, callback){
+        db.all("SELECT * FROM user WHERE email = ?",key, function (err, rows) {
+            if(err){
+                callback(err, null);
+            }else{
+                callback(null, rows);
+            }
+        });
+    };
+
+    /**
+     * key : Cle d'identification
+     * callback : Message d'erreur
+     */
+
+     this.findByPseudo = function(key, callback){
+        db.all("SELECT * FROM user WHERE pseudo = ?",key, function (err, rows) {
+            if(err){
+                callback(err, null);
+            }else{
+                callback(null, rows);
+            }
+        });
     };
 };
 
