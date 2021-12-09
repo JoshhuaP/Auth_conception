@@ -1,3 +1,6 @@
+const ControllerLogin = require('../controler/ControllerLogin.js');
+const CheckPassword = require('../controler/ControllerLogin.js');
+const { loginCheck } = require('../utils/passwd.js');
 const RequestReaderReturn  = require('./returnEnumeration/RequestReaderReturn.js');
 
 module.exports = class RequestReaderLogin{
@@ -34,27 +37,21 @@ module.exports = class RequestReaderLogin{
         return true;
     }
 
-    /**
-     * Ask at the controler to check the authentication and get the token or an error message
-     */
-    askAuthentification(){
-        let authentification = {} // get the token
-        authentification.status = 200
-        authentification.body = {"token": "digjdojgiodfjgodjgoidjgodj554gdg"}
-        return authentification;
-      }
-
     /** Receives the request and answer it 
      * @return 0 if 
      */
-    ReadRequest(request){
+    async ReadRequest(request, res){
         if(!this.ReadData(request))
         {
-            return RequestReaderReturn.DataRequestInvalid;
+          res.status(this.info.status)
+          res.send(this.info.body);
+          return RequestReaderReturn.DataRequestInvalid;
         }
-        let authentification = this.askAuthentification();
-        this.info.status =  authentification.status // Authentication
-        this.info.body = authentification.body
+        let controllerLogin = new ControllerLogin();
+        this.info = await controllerLogin.CheckPassword(this.username, this.password)
+        res.status(this.info.status)
+        res.send(this.info.body);
         return RequestReaderReturn.RequestValid
+
     }
 }

@@ -1,11 +1,13 @@
+const ControllerLogin = require("../../controler/ControllerLogin");
 const RequestReaderLogin = require("../../RequestReader/RequestReaderLogin");
 const RequestReaderReturn = require("../../RequestReader/returnEnumeration/RequestReaderReturn");
+const FakeResponse = require("./FakeResponse");
 
 /**
  * Simulates an authentication response.
  */
 beforeAll(()=>{
-  jest.spyOn(RequestReaderLogin.prototype, 'askAuthentification').mockImplementation(()=>{
+  jest.spyOn(ControllerLogin.prototype, 'CheckPassword').mockImplementation(()=>{
     let authentification = {} // get the token
     authentification.status = 201
     authentification.body = {"token": "digjdojgiodfjgodjgoidjgodj554gdg"}
@@ -27,10 +29,12 @@ test('CorrectRequest -> generation of token', () => {
     request.body = {};
     request.body.user="user";
     request.body.pwd="BestPassword";
-    let result = requestReaderLogin.ReadRequest(request);
-    expect(result).toBe(RequestReaderReturn.RequestValid);
-    expect(requestReaderLogin.info.status).toBe(201);
-    expect(requestReaderLogin.info.body.token).toBe("digjdojgiodfjgodjgoidjgodj554gdg");
+    let fakeResponse = new FakeResponse();
+    return requestReaderLogin.ReadRequest(request,fakeResponse).then(result=>{
+      expect(result).toBe(RequestReaderReturn.RequestValid);
+      expect(fakeResponse.Status).toBe(201);
+      expect(fakeResponse.Boddy.token).toBe("digjdojgiodfjgodjgoidjgodj554gdg");
+    })
   });
 
   /** Test the result of ReadRequest when the request is not compliant */
@@ -39,6 +43,11 @@ test('CorrectRequest -> generation of token', () => {
     let request = {};
     request.body = {};
     request.body.user="user";
-    let result = requestReaderLogin.ReadRequest(request);
-    expect(result).toBe(RequestReaderReturn.DataRequestInvalid);
+    let fakeResponse = new FakeResponse();
+    return requestReaderLogin.ReadRequest(request, fakeResponse).then(result => {
+        expect(result).toBe(RequestReaderReturn.DataRequestInvalid);
+        expect(fakeResponse.Status).toBe(400)
+        expect(fakeResponse.Boddy.message).toBe(RequestReaderReturn.DataRequestInvalid)
+    })
+    
   });
