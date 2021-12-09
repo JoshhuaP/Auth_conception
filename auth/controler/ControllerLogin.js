@@ -27,19 +27,19 @@ module.exports = class ControllerLogin{
                 }
                 else{
                     console.log(AuthentificationData.username + " : Connection failed, bad passsword")
-                    response.id_user = 403
+                    response.status = 403
                     response.body = {"message" : RequestReaderReturn.AuthentificationFailed};
                     endEvent.emit("end", 42);
                 }
             }).catch(function(error){
-                    console.log(AuthentificationData.username + " : Connection failed, bad passsword")
-                    response.id_user = 403
+                    console.log(username + " : Connection failed, bad passsword")
+                    response.status = 403
                     response.body = {"message" : RequestReaderReturn.AuthentificationFailed};
                     endEvent.emit("end", 42);
             })
               }).catch(()=>{
-            console.log(AuthentificationData.username +" Connection failed, bad username");
-            response.id_user = 403
+            console.log(username +" Connection failed, bad username");
+            response.status = 403
             response.body = {"message" : RequestReaderReturn.AuthentificationFailed}
             endEvent.emit("end", 42);
         })
