@@ -77,7 +77,7 @@ var UserDAO = function(){
      * callback : Message d'erreur
      */
     this.findByPseudo = function(key, callback){
-        db.all("SELECT password FROM user WHERE pseudo =?", key, callback)
+        db.all("SELECT password, id_user FROM user WHERE pseudo =?", key, callback)
     };
 };
 

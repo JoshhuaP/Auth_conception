@@ -1,4 +1,6 @@
-const bcrypt = require("bcryptjs");
+//depreciated -> see on Controller/ControllerLogin
+
+/*const bcrypt = require("bcryptjs");
 LocalStrategy = require("passport-local").Strategy;
 
 //Load model
@@ -10,7 +12,7 @@ const loginCheck = passport => {
     new LocalStrategy({ usernameField: "pseudo" }, (pseudo, password, done) => {
       //Check customer
 
-      User.findOne({ pseudo: pseudo })
+      User.findByPseudo({ pseudo: pseudo })
         .then((user) => {
           if (!user) {
             //si le nom d'utilisateur n'existe pas
@@ -56,3 +58,4 @@ const loginCheck = passport => {
 module.exports = {
   loginCheck,
 };
+*/
