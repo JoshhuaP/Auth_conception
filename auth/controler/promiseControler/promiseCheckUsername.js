@@ -13,6 +13,9 @@ module.exports = function PromiseCheckUsername(key, password)
                         "id_user" : rows[0].id_user
                     }
                     resolve(result);
+                }
+                else{
+                    reject(err)
                 }           
         });
     });
