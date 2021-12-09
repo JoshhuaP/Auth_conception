@@ -104,6 +104,7 @@ var UserDAO = function(){
      * key : Cle d'identification
      * callback : Message d'erreur
      */
+
      this.findByPseudo = function(key, callback){
         db.all("SELECT * FROM user WHERE pseudo = ?",key, function (err, rows) {
             if(err){
